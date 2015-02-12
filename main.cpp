@@ -4,15 +4,18 @@
 
 #define WS2812_BUF 60
 
-WS2812 ws(D9,WS2812_BUF);
 PixelArray px(WS2812_BUF);
+
+// See the program page for information on the timing numbers (eg: 0, 5, 5, 0)
+// The given numbers are for the K64F
+WS2812 ws(D9,WS2812_BUF, 0, 5, 5, 0);
 
 DigitalOut led(LED1);
 
 int main()
 {
 
-    ws.useII(2); // use per-pixel intensity scaling
+    ws.useII(WS2812::PER_PIXEL); // use per-pixel intensity scaling
     
     // set up the colours we want to draw with
     int colorbuf[6] = {0x2f0000,0x2f2f00,0x002f00,0x002f2f,0x00002f,0x2f002f};
